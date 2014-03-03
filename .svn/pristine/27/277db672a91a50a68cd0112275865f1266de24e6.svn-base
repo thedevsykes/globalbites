@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.globalbites"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.globalbites.GlobalBites"
+            android:label="@string/title_activity_global_bites" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.globalbites.MainActivity"
+            android:label="@string/app_name" >
+
+            <!-- <intent-filter> -->
+            <action android:name="android.intent.action.MAIN" />
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name="com.example.globalbites.About"
+            android:label="@string/title_activity_about"
+            android:parentActivityName="com.example.globalbites.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.globalbites.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.globalbites.Asia"
+            android:label="@string/title_activity_asia"
+            android:parentActivityName="com.example.globalbites.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.globalbites.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.globalbites.Europe"
+            android:label="@string/title_activity_europe"
+            android:parentActivityName="com.example.globalbites.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.globalbites.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.globalbites.Countries"
+            android:label="@string/title_activity_countries"
+            android:parentActivityName="com.example.globalbites.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.globalbites.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.globalbites.Americas"
+            android:label="@string/title_activity_americas"
+            android:parentActivityName="com.example.globalbites.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.globalbites.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.globalbites.Camera"
+            android:label="@string/title_activity_camera" >
+        </activity>
+        <activity
+            android:name="com.example.globalbites.Ingredients"
+            android:label="@string/title_activity_ingredients" >
+        </activity>
+        <activity
+            android:name="com.example.globalbites.RecipeList"
+            android:label="@string/recipe_list_activity" 
+            android:parentActivityName="com.example.globalbites.MainActivity">
+            
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.globalbites.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.globalbites.RecipeDisplay" >
+        </activity>
+    </application>
+
+</manifest>

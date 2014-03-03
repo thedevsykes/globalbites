@@ -1,0 +1,46 @@
+/**
+ * Splash screen class
+ */
+
+package com.example.globalbites;
+
+import com.example.globalbites.views.HomeView;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.os.Handler;
+import android.widget.TextView;
+
+public class GlobalBites extends Activity implements Runnable{
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_splash_screen);
+		
+		TextView gb = (TextView) findViewById(R.id.global_bites);  
+        Typeface gbf = Typeface.createFromAsset(getAssets(), "Ackermann.otf");  
+        gb.setTypeface(gbf);
+        
+        TextView cp = (TextView) findViewById(R.id.copyright);  
+        Typeface cpf = Typeface.createFromAsset(getAssets(), "Ackermann.otf");  
+        cp.setTypeface(cpf);
+        
+		Handler splashHandler = new Handler(); //this line makes a new handler for the splash screen
+        splashHandler.postDelayed(this, 2000); //this line displays the screen for 2000ms (2 seconds)
+	}
+
+	@Override
+	public void run() 
+	{  
+    	Intent i = new Intent(this, HomeView.class); //this creates a new intent object for the mainactivity     
+    	startActivity(i); //this runs the new object and launches mainactivity
+
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    	finish();//Ends the splash activity
+    	
+	} 
+
+}

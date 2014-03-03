@@ -1,0 +1,78 @@
+package com.example.globalbites;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class RecipeDisplay extends Activity
+{
+	private Recipe m_displayRecipe; 
+	
+	@Override 
+	protected void onCreate(Bundle savedInstanceState) 
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.recipe_display_activity);
+		
+		Bundle extras = getIntent().getExtras(); 
+		m_displayRecipe = (Recipe) extras.getSerializable("recipe");
+		
+		TextView recipeTitle =  (TextView) this.findViewById(R.id.recipe_title);
+		recipeTitle.setText(m_displayRecipe.getTitle());
+		
+		TextView recipeUrl = (TextView) this.findViewById(R.id.recipe_url); 
+		recipeUrl.setClickable(true); 
+		recipeUrl.setMovementMethod(LinkMovementMethod.getInstance());
+		String urlRecipe = "<a href='"+m_displayRecipe.getRecipeUrl()+"'>"+getString(R.string.recipe_link_text)+"</a>";
+		recipeUrl.setText(Html.fromHtml(urlRecipe));
+		
+		// Add image form the web.
+		ImageView i = (ImageView)findViewById(R.id.food_image);
+		String urlImage = m_displayRecipe.getImageUrl(); 
+		i.setTag(urlImage);
+		
+		DownloadWebImageTask task = new DownloadWebImageTask(); 
+		task.execute(i);
+	}
+}
+
+class DownloadWebImageTask extends AsyncTask<ImageView, Void, Bitmap>
+{
+	ImageView imageView = null;
+	
+	@Override
+	protected Bitmap doInBackground(ImageView... imageViews) 
+	{ 
+		this.imageView = imageViews[0];
+		String url = (String) imageView.getTag(); 
+		Bitmap bitmap = null;
+		
+		try {
+			bitmap = BitmapFactory.decodeStream(
+					(InputStream)new URL(url).getContent());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return bitmap; 
+	}
+	
+	@Override 
+	protected void onPostExecute(Bitmap result) 
+	{
+		imageView.setImageBitmap(result);
+	}
+}

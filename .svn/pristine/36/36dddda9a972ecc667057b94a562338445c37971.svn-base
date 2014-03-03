@@ -1,0 +1,58 @@
+/**
+ * Description please! 
+ */
+
+package com.example.globalbites.views;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.globalbites.NetworkImageLoader;
+import com.example.globalbites.NetworkWebpageLoader;
+import com.example.globalbites.R;
+import com.example.globalbites.models.Recipe;
+
+public class RecipeDisplayView extends Activity
+{
+	private Recipe m_displayRecipe; 
+	private String m_ingredients;
+	
+	@Override 
+	protected void onCreate(Bundle savedInstanceState) 
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.recipe_display_activity);
+		
+		m_ingredients = "";
+		
+		Bundle extras = getIntent().getExtras(); 
+		m_displayRecipe = (Recipe) extras.getSerializable("recipe");
+		
+		TextView recipeTitle =  (TextView) this.findViewById(R.id.recipe_title);
+		recipeTitle.setText(m_displayRecipe.getTitle());
+		
+		TextView recipeUrl = (TextView) this.findViewById(R.id.recipe_url); 
+		recipeUrl.setClickable(true); 
+		recipeUrl.setMovementMethod(LinkMovementMethod.getInstance());
+		String urlRecipe = "<a href='"+m_displayRecipe.getRecipeUrl()+"'>"+getString(R.string.recipe_link_text)+"</a>";
+		recipeUrl.setText(Html.fromHtml(urlRecipe));
+		
+		// Add image form the web.
+		ImageView i = (ImageView)findViewById(R.id.food_image);
+		String urlImage = m_displayRecipe.getImageUrl(); 
+		i.setTag(urlImage);
+		
+		NetworkImageLoader task = new NetworkImageLoader(); 
+		task.execute(i);
+		
+		NetworkWebpageLoader page = new NetworkWebpageLoader(); 
+		page.execute(m_displayRecipe.getF2FURL(), m_ingredients);
+		
+		Log.d("Test", m_ingredients);
+	}
+}

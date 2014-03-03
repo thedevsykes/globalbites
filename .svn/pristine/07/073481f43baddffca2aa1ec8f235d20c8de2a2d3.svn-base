@@ -1,0 +1,81 @@
+/**
+ * Grabs the ingredients of a given recipe from food2fork.com and passes it into an array
+ */
+
+package com.example.globalbites;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import android.os.AsyncTask;
+import android.widget.TextView;
+
+public class NetworkWebpageLoader extends
+		AsyncTask<TextView, Integer, ArrayList<String>> {
+	private TextView m_textView;
+
+	@Override
+	protected ArrayList<String> doInBackground(TextView... params) {
+		ArrayList<String> m_ingredients = new ArrayList<String>();
+
+		try {
+
+			this.m_textView = params[0];
+			URL url = new URL((String) m_textView.getTag());
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+			BufferedReader reader = null;
+
+			reader = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String line = "";
+
+			while ((line = reader.readLine()) != null) {
+				// In the string look for <h5>Ingredients:,/h5>
+				if (line.contains("<h5>Ingredients:</h5>")) {
+					// Find the url.
+					line = reader.readLine();
+
+					if (line.contains("<ul>")) {
+						line = reader.readLine();
+						// Keep reading lines until we find the closing
+						// brace.
+						while (!line.contains("</ul>")) {
+							line = reader.readLine();
+
+							Pattern p = Pattern
+									.compile("<li itemprop=\"ingredients\">(.*?)</li>");
+							Matcher m = p.matcher(line);
+
+							if (m.find()) {
+								m_ingredients.add(m.group(1));
+							}
+						}
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return m_ingredients;
+	}
+
+	// Cast the result into an arrayList
+	protected void onPostExecute(ArrayList<String> result) {
+		String ingredients = "";
+
+		for (int i = 0; i < result.size(); ++i) {
+			ingredients += result.get(i) + "\n";
+		}
+
+		m_textView.setText(ingredients);
+	}
+}

@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/background"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".AsiaViews" >
+    
+       <Button
+        android:id="@+id/chinese"
+        style="@style/MainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/android_button"
+        android:onClick="onClick"
+        android:text="Chinese" />
+
+    <Button
+        android:id="@+id/indian"
+        style="@style/MainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chinese"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/android_button"
+        android:onClick="onClick"
+        android:text="Indian" />
+
+    <Button
+        android:id="@+id/indonesian"
+        style="@style/MainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/indian"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/android_button"
+        android:onClick="onClick"
+        android:text="Indonesian" />
+
+    <Button
+        android:id="@+id/korean"
+        style="@style/MainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/indonesian"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/android_button"
+        android:onClick="onClick"
+        android:text="Korean" />
+    
+       <Button
+        android:id="@+id/thai"
+        style="@style/MainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/korean"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/android_button"
+        android:onClick="onClick"
+        android:text="Thai" />
+
+</RelativeLayout>

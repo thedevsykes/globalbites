@@ -1,0 +1,34 @@
+package com.example.globalbites;
+
+
+public class Recipe 
+{
+	private int m_id; 
+	private String m_imageUrl; 
+	private String m_title; 
+	private String m_publisher;
+	
+	public Recipe(int id, String imageUrl, String title, String publisher)
+	{
+		this.m_id = id; 
+		this.m_imageUrl = imageUrl;
+		this.m_title = title; 
+		this.m_publisher = publisher; 
+	}
+	
+	public int getID() 
+	{
+		return m_id;
+	}
+	
+	public String getTitle() 
+	{
+		return m_title; 
+	}
+	
+	@Override
+	public String toString() 
+	{
+		return m_title;
+	}
+}

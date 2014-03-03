@@ -1,0 +1,50 @@
+/**
+ * Description of this class please 
+ */
+
+package com.example.globalbites;
+
+import java.io.Serializable;
+
+
+public class Recipe implements Serializable
+{
+	private String m_imageUrl; 
+	private String m_title; 
+	private String m_publisher;
+	private String m_recipeUrl; 
+	
+	public Recipe(String imageUrl, String title, String publisher, String recipeUrl)
+	{
+		this.m_imageUrl = imageUrl;
+		this.m_title = title; 
+		this.m_publisher = publisher; 
+		this.m_recipeUrl = recipeUrl; 
+	}
+	
+	public String getTitle() 
+	{
+		return m_title; 
+	}
+	
+	public String getImageUrl()
+	{
+		return m_imageUrl;
+	}
+	
+	public String getPublisher()
+	{
+		return m_publisher;
+	}
+	
+	public String getRecipeUrl()
+	{
+		return m_recipeUrl;
+	}
+	
+	@Override
+	public String toString() 
+	{
+		return m_title;
+	}
+}

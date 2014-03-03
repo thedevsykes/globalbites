@@ -1,0 +1,89 @@
+/**
+ * Description please! 
+ */
+
+package com.example.globalbites;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
+public class NetworkWebpageLoader extends AsyncTask<String, Integer, ArrayList<String>>
+{
+	private ArrayList<String> m_ingredients;
+	
+	public NetworkWebpageLoader()
+	{
+		m_ingredients = new ArrayList<String>(); 
+	}
+	
+	@Override
+	protected ArrayList<String> doInBackground(String... params) 
+	{
+		try 
+		{
+			URL url = new URL(params[0]);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		
+			BufferedReader reader = null;
+			
+			try 
+			{
+				reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String line = "";
+				
+				while ((line = reader.readLine()) != null)
+				{
+					// In the string look for <h5>Ingredients:,/h5>
+					if ( line.contains("<h5>Ingredients:</h5>"))
+					{
+						// Find the url. 
+						line = reader.readLine(); 
+						
+						if ( line.contains("<ul>") )
+						{
+							line = reader.readLine(); 
+							// Keep reading lines until we find the closing 
+							// brace. 
+							while (!line.contains("</ul>")) 
+							{
+								line = reader.readLine();
+								
+								Pattern p = Pattern.compile("<li itemprop=\"ingredients\">(.*?)</li>");
+								Matcher m = p.matcher(line);
+								
+								if (m.find()) 
+								{
+									m_ingredients.add(m.group(1));
+								}
+							}
+						}
+					}
+				}
+				
+				for ( int i = 0; i < m_ingredients.size(); ++i ) 
+				{
+					params[1] +=  m_ingredients.get(i);
+				}
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+}

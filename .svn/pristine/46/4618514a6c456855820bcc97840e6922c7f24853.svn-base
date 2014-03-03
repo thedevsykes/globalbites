@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/recipe_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" 
+        android:textSize="32sp"
+        android:gravity="center" />
+
+    <ImageView
+        android:id="@+id/food_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_below="@+id/recipe_title"
+        android:maxHeight="300dp"
+        android:maxWidth="300dp" />
+
+    <TextView
+        android:id="@+id/recipe_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/food_image"
+        android:layout_below="@+id/food_image"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="14dp" />
+
+    <TextView
+        android:id="@+id/ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recipe_url"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

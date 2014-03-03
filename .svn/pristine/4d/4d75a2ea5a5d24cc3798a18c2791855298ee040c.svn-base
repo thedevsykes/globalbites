@@ -1,0 +1,105 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".GlobalBites" >
+
+    <TextView
+        android:id="@+id/copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/copyright"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/americas"
+        style="@style/MainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/chooseReigion"
+        android:layout_below="@+id/chooseReigion"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/android_europe"
+        android:onClick="onClick"
+        android:text="Americas" />
+
+    <Button
+        android:id="@+id/asia"
+        style="@style/MainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/europe"
+        android:layout_below="@+id/americas"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/android_americas"
+        android:onClick="onClick"
+        android:text="Asia" />
+
+    <TextView
+        android:id="@+id/chooseReigion"
+        style="@style/MainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/asia"
+        android:layout_alignParentTop="true"
+        android:text="Choose which region you would like" />
+
+    <ImageButton
+        android:id="@+id/ImageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/copyright"
+        android:layout_marginBottom="23dp"
+        android:layout_toRightOf="@+id/sign"
+        android:background="@drawable/ic_launcher" />
+
+    <Button
+        android:id="@+id/aboutButton"
+        style="@style/MainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ImageButton1"
+        android:layout_toRightOf="@+id/copyright"
+        android:background="@drawable/android_about"
+        android:onClick="onClick"
+        android:text="About" />
+
+    <ImageButton
+        android:id="@+id/camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/chooseReigion"
+        android:layout_alignTop="@+id/americas"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/android_camera"
+        android:onClick="onClick" />
+
+    <ImageButton
+        android:id="@+id/sign"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/camera"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/camera"
+        android:background="@drawable/sign" />
+
+    <Button
+        android:id="@+id/europe"
+        style="@style/MainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/copyright"
+        android:layout_below="@+id/asia"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/android_asia"
+        android:onClick="onClick"
+        android:text="Europe" />
+
+</RelativeLayout>
